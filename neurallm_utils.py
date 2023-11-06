@@ -1,6 +1,7 @@
 # for word tokenization
 import nltk
 import csv
+from collections import defaultdict
 
 nltk.download('punkt')
 
@@ -58,6 +59,10 @@ def read_file_spooky(datapath, ngram, by_character=False):
             data.append(tokenize_line(row['text'].lower(), ngram, by_char=by_character, space_char="_"))
     return data
 
-
 # Feel free to add more functions here as you would like!
-def read_text_file(datapath)
+def get_vocab(data):
+  vocab = defaultdict(lambda: 0)
+  for sentence in data:
+    for token in sentence:
+      vocab[token] += 1
+  return vocab
